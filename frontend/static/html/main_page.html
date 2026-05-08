@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NextGen Store — цифровые игры и ключи</title>
+
+<!-- =====================
+     STYLESHEETS>
+===================== -->
+  <link rel="stylesheet" href="{{ url_for('static', path='css/main_page.css') }}" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+  
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- favicon icon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-icon.png">
+
+  
+</head>
+<body>
+
+<div id="toast-container"></div>
+
+  <!-- =====================
+       HEADER
+  ===================== -->
+  <header>
+    
+
+    <div class="container header-inner">
+      <div class="logo">
+        <img src="/static/images/logo.png" alt="logo">
+        <span class="header-text">NextGen Store</span>
+      </div> 
+      
+      <div class="header-search">
+          <input type="text" class="search-input" placeholder="Поиск игр, ключей и подписок..." />
+          <button class="search-button">Поиск</button>
+          <ul id="search-dropdown" class="search-dropdown"></ul>
+      </div>
+
+
+      <nav>
+
+        <ul class="nav-list">
+          <li><a href="#hero">Главная</a></li>
+          
+          <li class="dropdown">
+            <span class="dropdown-toggle">Каталог</span>
+            
+            <ul class="dropdown-menu">
+              <li><a href="/all_products">Все товары</a></li>
+              <li><a href="/games">Игры</a></li>
+              <li><a href="/dlc">DLC</a></li>
+              <li><a href="/subscribes">Подписки</a></li>
+            </ul> 
+          <li><a href="#footer">Контакты</a></li>
+          
+          <a href="/cart" class="js-cart">
+            <i class="fa-solid fa-cart-shopping" ></i>
+            <h3>Корзина</h3>
+          </a>
+
+          <div class="js-auth">
+            <i class="fa-solid fa-user"></i>
+            <h3 id="loginText">Войти</h3>
+            
+          </div>
+
+          <div id="authModal" class="modal" style="display: none;">
+            <div class="modalContentAuth">
+              <h2 id="authTitle">Вход</h2>
+              <i id="closeAuthModal" class="fa-solid fa-x"></i>
+                <input type="text" id="login-input" placeholder="Введите логин: ">
+                <input type="email" id="email-input" placeholder="Введите email: " style="display: none;">
+                <input type="password" id="password-input1" placeholder="Введите пароль: ">
+                <input type="password" id="password-input2" placeholder="Повторите пароль: " style="display: none;">
+                <button id="authSubmit">Войти</button>
+                <p class="switch">Нет аккаунта?
+                  <span id="switchModeBtn">Регистрация</span>
+                </p>
+            </div>
+          </div>
+
+        </ul>
+      </nav>
+
+    </div>
+  </header>
+
+  <!-- =====================
+       HERO
+  ===================== -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <h1>Цифровые товары по лучшим ценам!</h1>
+      <p>Покупайте лицензионные игры, DLC и подписки с мгновенной доставкой и поддержкой 24/7.</p>
+      <a href="/all_products" class="btn-to-catalog">Перейти в каталог</a>
+    </div>
+  </section>
+
+  <!-- =====================
+       CATALOG
+  ===================== -->
+  <section id="catalog">
+    <div class="container">
+      <h2>Популярные товары</h2>
+      <div class="catalog-grid">
+        
+        <div class="catalog-track">
+        <div class="product-card" data-id="1">
+          <img src="/static/images/products/Death_Stranding_2_On_The_Beach_img.jpg" alt="Death Stranding 2">
+          <h3>Death Stranding 2</h3>
+          <div class="price">3500 ₽</div>
+          <button class="open-product-btn">Купить</button>
+        </div>
+ 
+        <!-- Product 2 -->
+        <div class="product-card" data-id="2">
+          <img src="/static/images/products/Silksong.jpg" alt="Hollow Knight: Silksong">
+          <h3>Hollow Knight: Silksong</h3>
+          <div class="price">1000 ₽</div>
+          <button class="open-product-btn">Купить</button>
+        </div>
+
+        <!-- Product 3 -->
+        <div class="product-card" data-id="3">
+          <img src="/static/images/products/arc_raiders.jpg" alt="ARC Raiders">
+          <h3>ARC Raiders</h3>
+          <div class="price">2950 ₽</div>
+          <button class="open-product-btn">Купить</button>
+        </div>
+        
+
+        <!-- Product 4 -->
+        <div class="product-card" data-id="4">
+          <img src="/static/images/products/product1.png" alt="DOOM: The Dark Ages">
+          <h3>DOOM: The Dark Ages</h3>
+          <div class="price">4000 ₽</div>
+          <button class="open-product-btn">Купить</button>
+        </div>
+        
+
+        <!-- Product 5 -->
+        <div class="product-card" data-id="6">
+          <img src="/static/images/products/bf6.jpg" alt="Battlefield 6 ">
+          <h3>Battlefield 6</h3>
+          <div class="price">7000 ₽</div>
+          <button class="open-product-btn">Купить</button>
+        </div>
+        </div>
+        </div>
+      </div>
+        
+  </section>
+
+  <!-- =====================
+       BENEFITS
+  ===================== -->
+  <section>
+    <div class="container">
+      <h2>Почему выбирают нас</h2>
+      <div class="benefits-grid">
+        <div class="benefit">
+          <h3>Мгновенная доставка</h3>
+          <p>Ключи приходят сразу после оплаты.</p>
+        </div>
+        <div class="benefit">
+          <h3>Лицензионные ключи</h3>
+          <p>Только официальные и проверенные продукты.</p>
+        </div>
+        <div class="benefit">
+          <h3>Поддержка 24/7</h3>
+          <p>Мы всегда на связи и готовы помочь.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       REVIEWS
+  ===================== -->
+  <section>
+    <div class="container">
+      <h2>Отзывы клиентов</h2>
+      <div class="reviews-grid">
+        <div class="review">
+          <p>Отличный магазин, ключ пришёл моментально. Цены ниже, чем у конкурентов.</p>
+          <span>— Алексей</span>
+        </div>
+        <div class="review">
+          <p>Покупаю здесь уже не первый раз, всё работает без проблем.</p>
+          <span>— Мария</span>
+        </div>
+        <div class="review">
+          <p>Поддержка помогла за пару минут, сервис на высоте!</p>
+          <span>— Дмитрий</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================
+       FOOTER
+  ===================== -->
+  <footer id="footer">
+    <div class="container">
+      <p>© 2026 NextGen Store. Все права защищены.</p>
+      <div class="socials">
+        <a href="#" title="VK">VK</a>
+        <a href="#" title="Telegram">TG</a>
+        <a href="#" title="YouTube">YT</a>
+      </div>
+    </div>
+  </footer>
+
+<!-- Scripts -->
+
+<script type="module" src="/static/js/main.js"></script> 
+
+
+</body>
+</html>

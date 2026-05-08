@@ -1,0 +1,125 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextGen Store | Все DLC</title>
+
+<link rel="stylesheet" href="/static/css/all_products.css" />
+
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"> 
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- favicon icon -->
+<link rel="icon" type="image/png" sizes="32x32" href="/static/images/favicon-icon.png">
+</head>
+<body>
+  
+<div id="toast-container"></div>
+<!-- =====================
+HEADER
+===================== -->
+
+
+<header>
+  <div class="container header-inner">
+    <div class="logo">
+      <img src="/static/images/logo.png" alt="logo">
+      <span class="header-text">NextGen Store</span>
+    </div> 
+    
+    <div class="header-search">
+        <input type="text" class="search-input" placeholder="Поиск игр, ключей и подписок..." />
+        <button class="search-button">Поиск</button>
+    </div>
+
+    <nav>
+      <ul class="nav-list">
+        <li><a href="/">Главная</a></li>
+        
+        <li class="dropdown">
+          <span class="dropdown-toggle">Каталог</span>
+          
+          <ul class="dropdown-menu">
+            <li><a href="/all_products">Все игры</a></li>
+            <li><a href="/games">Игры</a></li>
+            <li><a href="/dlc">DLC</a></li>
+            <li><a href="/subscribes">Подписки</a></li>
+          </ul> 
+        <li><a href="/contacts">Контакты</a></li>
+        
+          <a href="/cart" class="js-cart">
+            <i class="fa-solid fa-cart-shopping" ></i>
+            <h3>Корзина</h3>
+          </a>
+
+          
+
+          <div class="js-auth">
+            <i class="fa-solid fa-user"></i>
+            <h3 id="loginText">Войти</h3>
+            
+          </div>
+
+          <div id="authModal" class="modal" style="display: none;">
+            <div class="modalContentAuth">
+              <h2 id="authTitle">Вход</h2>
+              <i id="closeAuthModal" class="fa-solid fa-x"></i>
+                <input type="text" id="login-input" placeholder="Введите логин: ">
+                <input type="email" id="email-input" placeholder="Введите email: " style="display: none;">
+                <input type="password" id="password-input1" placeholder="Введите пароль: ">
+                <input type="password" id="password-input2" placeholder="Повторите пароль: " style="display: none;">
+                <button id="authSubmit">Войти</button>
+                <p class="switch">Нет аккаунта?
+                  <span id="switchModeBtn">Регистрация</span>
+                </p>
+            </div>
+          </div>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+    <!-- =====================
+       CATALOG
+  ===================== -->
+
+<main class="content">
+<section id="catalog">
+<div class="container" id="allGamesContainer">
+    <h2>Все DLC к играм</h2>
+    <div class="catalog-grid" id="all-dlc-catalog">
+    <!-- Products -->
+    </div>
+</div>
+</main>
+
+    
+<!-- =====================
+    FOOTER
+===================== -->
+<footer id="footer">
+  <div class="container">
+    <p>© 2026 NextGen Store. Все права защищены.</p>
+    <div class="socials">
+      <a href="#" title="VK">VK</a>
+      <a href="#" title="Telegram">TG</a>
+      <a href="#" title="YouTube">YT</a>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- Scripts -->
+
+<script type="module" src="/static/js/main.js"></script> 
+
+</div>
+
+</body>
+</html>

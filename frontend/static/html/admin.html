@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+
+<script type="module" src="/static/js/admin/admin.js"></script>
+
+<div class="admin-container">
+
+    <h1>Админ панель</h1>
+    <div class="login-box" id="loginBox">
+        <h2>Вход</h2>
+
+        <input type="text" id="login" placeholder="Логин">
+        <input type="password" id="password" placeholder="Пароль">
+
+        <button class="LoginButton" id="login-btn">Войти</button>
+    </div>
+
+    
+    <div class="admin-actions" id="adminActions" style="display: none;">
+        
+        <button class="showFormBtn" id ="showAddFormBtn">Добавить товар</button>
+
+        <div class="addProductFormContainer" id="addProductFormContainer" style="display: none; margin-top: 20px;">
+            <h3>Добавить новый товар</h3>
+            <input type="text" placeholder="Категория товара" id = "productCategory">
+            <input type="text" placeholder="Название товара" id = "productName">
+            <textarea type="text" placeholder="Описание товара" id = "productDescription"></textarea>
+            <input type="number" placeholder="Цена товара" id = "productPrice">
+            <input type="number" placeholder="Количество товара" id="productQuantity">
+            <input id="imageProduct" type="file" accept="image/*">
+           
+            <button class="addProductBtn" id="addProductBtn">Сохранить товар</button>
+        </div>
+
+        <button class="showDeleteFormBtn" id ="showDeleteFormBtn">Удалить товар</button>
+
+        <div class="deleteProductFormContainer" id="deleteProductFormContainer" style="display: none; margin-top: 20px;">
+            <h3>Удалить товар</h3>
+            <input type="number" placeholder="ID товара" id = "productId">
+            <button class="deleteProductBtn" id="deleteProductBtn">Удалить товар</button>
+        </div>
+        
+    </div>
+
+</div>
+
+</body>
+</html>
+ 
