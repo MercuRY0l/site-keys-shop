@@ -12,7 +12,6 @@ from app.services.register_service import RegisterService
 
 
 from domain.services.user_service import UserModelService
-from domain.services.auth_tokens_service import AuthTokensModelService
 
 from infrastructure.services.hash_pass_service import HashPassService
 from infrastructure.services.hash_token_service import HashTokenService
@@ -20,7 +19,6 @@ from infrastructure.services.jwt_tokens_service import JwtTokensService
 from infrastructure.services.brute_protection_service import BruteService
 
 from infrastructure.database.repositories.user_repo import UserRepository
-from infrastructure.database.repositories.auth_tokens_repo import AuthTokensRepository
 from infrastructure.database.repositories.log_repo import LogRepo
 
 from domain.services.log_service import LogService
@@ -35,12 +33,10 @@ templates = Jinja2Templates(directory="C:/Users/udgit/Documents/site_project_fas
 def get_reg_service():
     
     user_repo = UserRepository()
-    auth_repo = AuthTokensRepository()
     log_repo = LogRepo()
     
     return RegisterService(
         db_user_service=UserModelService(repository=user_repo),
-        db_token_service=AuthTokensModelService(repo=auth_repo),
         log_service = LogService(repo=log_repo),
         
         brute_service=BruteService(),
