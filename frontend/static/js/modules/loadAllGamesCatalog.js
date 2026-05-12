@@ -1,7 +1,8 @@
 
 import { API_URL } from "../config.js";
 import { apiFetch } from "./apiFetch.js";
-import { getUser } from "./getUser.js";
+import { loadCurrentUser } from "./loadCurrentUser.js";
+
 
 export async function loadAllGamesCatalog(){
     try {
@@ -11,7 +12,7 @@ export async function loadAllGamesCatalog(){
         const response = await apiFetch(`${API_URL}/products/games`);
         const products = await response.json();
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
 
         let cart_items = [];
         if (user) {

@@ -1,5 +1,5 @@
 
-import { getUser } from "../../modules/getUser.js";
+import { loadCurrentUser } from "../../modules/loadCurrentUser.js";
 import { showToast } from "../../modules/showToast.js";
 
 export function handleCartLink() {
@@ -9,7 +9,7 @@ export function handleCartLink() {
 
         e.preventDefault();
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
         if (!user) {
             showToast("Для данного действия необходима авторизация!", "error");
             return;

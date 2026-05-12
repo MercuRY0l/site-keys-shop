@@ -1,9 +1,9 @@
 import { updateCartButtonState } from "../cart/modules/updateCartBtnState.js";
 import {showToast} from "../modules/showToast.js"
-import {getUser} from "../modules/getUser.js"
 import {getProductIdFromUrl} from "../modules/getProductIdFromUrl.js"
 import {apiFetch} from "../modules/apiFetch.js";
 import {API_URL} from "../config.js"
+import { loadCurrentUser } from "../modules/loadCurrentUser.js";
 
 export function inProductFunctions() {
     const cart_btn = document.querySelector(".add-to-cart-btn");
@@ -49,7 +49,7 @@ export function inProductFunctions() {
             return;
         }
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
 
         if (!user){
             showToast("Для данного действия необходима авторизация!", "error");
