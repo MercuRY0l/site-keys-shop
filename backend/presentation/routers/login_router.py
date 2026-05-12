@@ -119,7 +119,11 @@ async def login_for_accsess_token(request : Request, data : LoginDTO, service = 
     
     
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        traceback.print_exc()
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                            detail=str(e))
+        
+        
    
         
     

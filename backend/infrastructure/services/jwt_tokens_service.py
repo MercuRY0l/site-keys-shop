@@ -10,6 +10,8 @@ from domain.interfaces.jwt_interface import IJWTService
 load_dotenv()
 
 SECRET_KEY = os.getenv(key="SECRET_KEY")
+REFRESH_EXPIRES = int(os.getenv(key="REFRESH_TOKEN_EXPIRES"))
+ACCESS_EXPIRES = int(os.getenv(key="ACCESS_TOKEN_EXPIRES"))
 
 class JwtTokensService(IJWTService):        
 
@@ -18,7 +20,7 @@ class JwtTokensService(IJWTService):
             'user_id': user_id,
             'username': username,
             'type' : 'access',
-            'exp': datetime.now(timezone.utc) + timedelta(minutes=60),
+            'exp': datetime.now(timezone.utc) + timedelta(minutes=ACCESS_EXPIRES),
             'iat': datetime.now(timezone.utc),
             
         }
@@ -26,7 +28,7 @@ class JwtTokensService(IJWTService):
         refresh_token_payload = {
             'user_id': user_id,
             'type' : 'refresh',
-            'exp': datetime.now(timezone.utc) + timedelta(days=7),
+            'exp': datetime.now(timezone.utc) + timedelta(days=REFRESH_EXPIRES),
             'iat': datetime.now(timezone.utc),
         }
         

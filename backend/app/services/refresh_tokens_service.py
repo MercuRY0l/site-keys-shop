@@ -10,7 +10,7 @@ from domain.interfaces.brute_interface import IBruteService
 
 from app.dto.refresh_dto import RefreshDTO
 
-from app.exceptions.refresh_exceptions import TokenNotFound, UserNotFound, TokenTypeIncorrect, TokenIsBlacklisted
+from app.exceptions.refresh_exceptions import TokenNotFound, UserNotFound, TokenTypeIncorrect
 class RefreshService:
     
     def __init__(self,
