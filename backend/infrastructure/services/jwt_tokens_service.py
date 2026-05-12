@@ -27,6 +27,7 @@ class JwtTokensService(IJWTService):
         
         refresh_token_payload = {
             'user_id': user_id,
+            "username" : username,
             'type' : 'refresh',
             'exp': datetime.now(timezone.utc) + timedelta(days=REFRESH_EXPIRES),
             'iat': datetime.now(timezone.utc),

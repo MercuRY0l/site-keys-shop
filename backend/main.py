@@ -14,6 +14,7 @@ from presentation.routers.register_router import register_router
 from presentation.routers.order_router import router as order_router
 
 from presentation.routers.user_settings_router import user_setting_router 
+from presentation.routers.refresh_router import refresh_router
 
 from infrastructure.database.init_db import init_db
 
@@ -32,6 +33,8 @@ app.include_router(register_router)
 app.include_router(logout_router)
 app.include_router(feedback_router)
 app.include_router(order_router)
+app.include_router(refresh_router)
+
 
 
 app.mount("/static", StaticFiles(directory="./frontend/static"), name = "static")
