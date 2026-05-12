@@ -9,7 +9,7 @@ export async function loadAllSubscribesCatalog(){
         const container = document.getElementById("all-subscribes-catalog");
         if (!container) return;
 
-        const response = await fetch(`${API_URL}/products/subscribes`);
+        const response = await apiFetch(`${API_URL}/products/subscribes`);
         const products = await response.json();
 
         const user = await getUser();

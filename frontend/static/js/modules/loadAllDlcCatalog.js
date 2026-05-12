@@ -8,7 +8,7 @@ export async function loadAllDlcCatalog(){
         const container = document.getElementById("all-dlc-catalog");
         if (!container) return;
 
-        const response = await fetch("http://127.0.0.1:8000/products/dlc");
+        const response = await apiFetch(`${API_URL}/products/dlc`);
         const products = await response.json();
 
         const user = await getUser();

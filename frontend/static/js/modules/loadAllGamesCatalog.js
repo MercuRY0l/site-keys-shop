@@ -2,15 +2,13 @@
 import { API_URL } from "../config.js";
 import { apiFetch } from "./apiFetch.js";
 import { getUser } from "./getUser.js";
-// import {showToast} from "../modules/showToast.js"
-
 
 export async function loadAllGamesCatalog(){
     try {
         const container = document.getElementById("all-games-catalog");
         if (!container) return;
 
-        const response = await fetch("http://127.0.0.1:8000/products/games");
+        const response = await apiFetch(`${API_URL}/products/games`);
         const products = await response.json();
 
         const user = await getUser();
