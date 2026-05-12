@@ -1,4 +1,4 @@
-
+import { API_URL } from "../../config.js";
 
 export async function addNewProduct() {
     const imageInput = document.getElementById("imageProduct");
@@ -32,7 +32,7 @@ export async function addNewProduct() {
 
     
     try {
-        const response = await fetch("http://127.0.0.1:8000/products/create/", {
+        const response = await fetch(`${API_URL}/products/create/`, {
             method: "POST",
             body: formData
         });

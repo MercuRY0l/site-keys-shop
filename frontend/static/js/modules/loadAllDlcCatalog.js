@@ -1,7 +1,7 @@
 
+import { API_URL } from "../config.js";
+import { apiFetch } from "./apiFetch.js";
 import { getUser } from "./getUser.js";
-// import {showToast} from "../modules/showToast.js"
-
 
 export async function loadAllDlcCatalog(){
     try {
@@ -16,7 +16,7 @@ export async function loadAllDlcCatalog(){
         let cart_items = [];
         if (user) {
             try {
-                const response2 = await fetch("http://127.0.0.1:8000/cart/items/get", {
+                const response2 = await apiFetch(`${API_URL}/cart/items/get`, {
                     method: "GET",
                     credentials: "include"
                 });

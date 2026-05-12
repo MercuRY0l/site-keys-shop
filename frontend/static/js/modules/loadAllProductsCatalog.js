@@ -1,4 +1,6 @@
+import { API_URL } from "../config.js";
 import { getUser } from "../modules/getUser.js";
+import { apiFetch } from "./apiFetch.js";
 
 export async function loadAllProductsCatalog() {
     try {
@@ -13,7 +15,7 @@ export async function loadAllProductsCatalog() {
         let cart_items = [];
         if (user) {
             try {
-                const response2 = await fetch("http://127.0.0.1:8000/cart/items/get", {
+                const response2 = await apiFetch(`${API_URL}/cart/items/get`, {
                     method: "GET",
                     credentials: "include"
                 });

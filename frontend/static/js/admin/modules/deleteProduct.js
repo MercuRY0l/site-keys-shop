@@ -1,5 +1,5 @@
 
-
+import { API_URL } from "../../config.js";
 
 export async function deleteProductById(){
 
@@ -16,7 +16,7 @@ export async function deleteProductById(){
     }
 
     try{
-        const response = await fetch("http://127.0.0.1:8000/products/delete/", {
+        const response = await fetch(`${API_URL}/products/delete/`, {
         method: "POST",
         body : formData
     });

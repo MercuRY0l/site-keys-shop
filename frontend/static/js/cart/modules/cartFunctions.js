@@ -1,5 +1,8 @@
 import { getUser } from "../../modules/getUser.js";
 import { showToast } from "../../modules/showToast.js";
+import {apiFetch} from "../../modules/apiFetch.js"
+import {API_URL} from "../../config.js"
+
 
 export function handleCartClicks() {
     document.addEventListener("click", async (e) => {
@@ -18,7 +21,7 @@ export function handleCartClicks() {
         const quantity = 1;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/cart/items/", {
+            const response = await apiFetch(`${API_URL}/cart/items/`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },

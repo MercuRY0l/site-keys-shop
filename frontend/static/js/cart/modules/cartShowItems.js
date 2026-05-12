@@ -1,6 +1,7 @@
 
 import { calculateTotal, updateTotalAmount } from "./calculateTotal.js";
-
+import { apiFetch } from "../../modules/apiFetch.js";
+import { API_URL } from "../../config.js"
 
 export async function cartShowItems() {
     try {
@@ -11,7 +12,7 @@ export async function cartShowItems() {
 
         if (!title || !leftContainer || !rightContainer) return;
 
-        const response = await fetch("http://127.0.0.1:8000/cart/items/get", {
+        const response = await apiFetch(`${API_URL}/cart/items/get`, {
             method: "GET",
             credentials: "include"
         });

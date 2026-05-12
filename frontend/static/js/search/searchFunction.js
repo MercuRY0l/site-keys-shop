@@ -1,3 +1,5 @@
+import {API_URL} from "../config.js"
+
 const searchInput = document.querySelector(".search-input");
 const searchDropdown = document.getElementById("search-dropdown");
 
@@ -9,7 +11,7 @@ async function search() {
         return;
     }
     try {
-        const response = await fetch(`http://127.0.0.1:8000/products/search?q=${encodeURIComponent(query)}`);
+        const response = await fetch(`${API_URL}/products/search?q=${encodeURIComponent(query)}`);
         if (!response.ok) throw new Error("Ошибка поиска");
 
         const products = await response.json();

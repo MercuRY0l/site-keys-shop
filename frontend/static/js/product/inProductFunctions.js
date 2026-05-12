@@ -2,6 +2,8 @@ import { updateCartButtonState } from "../cart/modules/updateCartBtnState.js";
 import {showToast} from "../modules/showToast.js"
 import {getUser} from "../modules/getUser.js"
 import {getProductIdFromUrl} from "../modules/getProductIdFromUrl.js"
+import {apiFetch} from "../modules/apiFetch.js";
+import {API_URL} from "../config.js"
 
 export function inProductFunctions() {
     const cart_btn = document.querySelector(".add-to-cart-btn");
@@ -20,7 +22,7 @@ export function inProductFunctions() {
         if (cart_btn.classList.contains("added")) return;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/cart/items/", {
+            const response = await apiFetch(`${API_URL}/cart/items/`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -56,7 +58,7 @@ export function inProductFunctions() {
         
         try{
             
-            const response = await fetch(`http://127.0.0.1:8000/orders/from-product/${product_id}`, {
+            const response = await apiFetch(`${API_URL}/orders/from-product/${product_id}`, {
                 method : "POST",
                 credentials : "include",
                 headers : {"Content-Type" : "application/json"},

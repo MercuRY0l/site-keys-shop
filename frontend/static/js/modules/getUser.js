@@ -1,8 +1,8 @@
-
+import { API_URL } from "../config.js";
 
 export async function getUser(){
     try{
-        const response = await fetch("http://127.0.0.1:8000/api/auth/me/", {
+        const response = await fetch(`${API_URL}/api/auth/me/`, {
             method : "GET",
             credentials : "include"
         })
