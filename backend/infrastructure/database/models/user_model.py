@@ -9,6 +9,7 @@ class UserModel(Base):
     password = Column("Password", String(255), nullable=False)
     email = Column("Email", String(255), unique=True, nullable=False)
     created_at = Column("created_at", DateTime(timezone=True), server_default=func.sysdatetime())
+    role = Column("role", String(20), default="user", nullable=False)
     
     def __repr__(self):
         return f"<UserModel(id={self.username}, username={self.username})>"
