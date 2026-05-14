@@ -34,7 +34,7 @@ class RefreshService:
         refresh_token = refresh_dto.refresh_token
         
         if not refresh_token:
-            await self.log_service.create_log(event_type="Refresh", username=None, user_id=None, status="Failed", ip=refresh_dto.ip, reason="Невозможно обновить токен, refresh токена нет!")
+            await self.log_service.create_log(LogDomainModel(event_type="Refresh", username=None, user_id=None, status="Failed", ip=refresh_dto.ip, reason="Невозможно обновить токен, refresh токена нет!"))
             return {"error" : "Refresh токен не найден"}
         
         try:

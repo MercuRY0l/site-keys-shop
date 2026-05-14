@@ -43,7 +43,7 @@ async def refresh(response: Response, request : Request, service : dict = Depend
     response.set_cookie(
         key="access_token",
         path="/",
-        value=tokens["access_token"],
+        value=tokens["access"],
         samesite="lax",
         secure=False,
         httponly=False
@@ -52,7 +52,7 @@ async def refresh(response: Response, request : Request, service : dict = Depend
     response.set_cookie(
         key="refresh_token",
         path="/",
-        value=tokens["refresh_token"],
+        value=tokens["refresh"],
         samesite="lax",
         secure=False,
         httponly=False
