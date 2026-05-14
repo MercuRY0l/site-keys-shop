@@ -15,10 +15,11 @@ ACCESS_EXPIRES = int(os.getenv(key="ACCESS_TOKEN_EXPIRES"))
 
 class JwtTokensService(IJWTService):        
 
-    def create_jwt_token(self, user_id, username):
+    def create_jwt_token(self, user_id, username, role):
         access_token_payload = {
             'user_id': user_id,
             'username': username,
+            'role' : role,
             'type' : 'access',
             'exp': datetime.now(timezone.utc) + timedelta(minutes=ACCESS_EXPIRES),
             'iat': datetime.now(timezone.utc),
@@ -27,7 +28,8 @@ class JwtTokensService(IJWTService):
         
         refresh_token_payload = {
             'user_id': user_id,
-            "username" : username,
+            'username' : username,
+            'role' : role,
             'type' : 'refresh',
             'exp': datetime.now(timezone.utc) + timedelta(days=REFRESH_EXPIRES),
             'iat': datetime.now(timezone.utc),
