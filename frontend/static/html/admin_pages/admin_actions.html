@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/admin_actions.css">
+</head>
+<body>
+    
+<div class="admin-actions" id="adminActions">
+    <h2>⚡ Админ-панель NextGen</h2>
+    <div class="primary-buttons">
+        <button class="open-modal-btn" id="showAddFormBtn">➕ Добавить товар</button>
+        <button class="open-modal-btn" id="showDeleteFormBtn">🗑️ Удалить товар</button>
+    </div>
+</div>
+
+
+<div id="addModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>✨ Новый товар</h3>
+            <button class="close-modal" data-close="addModal">&times;</button>
+        </div>
+        <div class="add-product-form">
+            <input type="text" id="modalProductCategory" placeholder="Категория (например: Электроника)" autocomplete="off">
+            <input type="text" id="modalProductName" placeholder="Название товара" autocomplete="off">
+            <textarea id="modalProductDescription" placeholder="Описание товара..."></textarea>
+            <input type="number" id="modalProductPrice" placeholder="Цена (₽)" step="0.01">
+            <input type="number" id="modalProductQuantity" placeholder="Количество на складе">
+            <div class="file-input">
+                <label style="font-size:0.85rem; color:#334155;">📷 Изображение товара: </label>
+                <input id="modalImageProduct" type="file" accept="image/*">
+            </div>
+            <button class="btn-submit" id="confirmAddProductBtn">💾 Сохранить товар</button>
+        </div>
+    </div>
+</div>
+
+
+<div id="deleteModal" class="modal-overlay">
+    <div class="modal-container">
+        <div class="modal-header">
+            <h3>🗑️ Удалить товар</h3>
+            <button class="close-modal" data-close="deleteModal">&times;</button>
+        </div>
+        <div style="margin-bottom: 12px; font-size:0.9rem; color:#334155;">
+            📋 Нажмите на кнопку "Удалить" рядом с товаром
+        </div>
+        <div id="productsListContainer" class="products-list">
+           
+            <div style="text-align:center; padding:20px;">Загрузка товаров... <span class="loading-spinner"></span></div>
+        </div>
+    </div>
+</div>
+
+
+<script type="module" src="/static/js/admin/admin.js"></script>t
+
+</body>
+</html>
