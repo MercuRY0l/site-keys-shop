@@ -3,7 +3,6 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 from presentation.routers.main_page_router import router as main_page_router
-from presentation.routers.admin_router import router as admin_router
 from presentation.routers.products_router import router as product_router
 from presentation.routers.cart_router import router as cart_router
 
@@ -15,6 +14,7 @@ from presentation.routers.order_router import router as order_router
 
 from presentation.routers.user_settings_router import user_setting_router 
 from presentation.routers.refresh_router import refresh_router
+from presentation.routers.admin_router import admin_router
 
 from infrastructure.database.init_db import init_db
 
@@ -23,7 +23,6 @@ init_db()
 app = FastAPI()
 
 app.include_router(main_page_router)
-app.include_router(admin_router)
 app.include_router(product_router) 
 app.include_router(cart_router)
 app.include_router(user_setting_router)
@@ -34,6 +33,7 @@ app.include_router(logout_router)
 app.include_router(feedback_router)
 app.include_router(order_router)
 app.include_router(refresh_router)
+app.include_router(admin_router)
 
 
 

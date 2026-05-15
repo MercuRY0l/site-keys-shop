@@ -1,9 +1,12 @@
+import os
+
 from fastapi import Cookie, HTTPException, status
 import jwt
 
 from infrastructure.database.repositories.user_repo import UserRepository
 from infrastructure.services.jwt_tokens_service import JwtTokensService
 
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 async def get_current_user(
     access_token: str = Cookie(None),
@@ -51,3 +54,21 @@ async def get_current_user(
         )
 
     return user
+
+
+
+def get_current_admin(access_token : str = Cookie(None)):
+    
+    if not access_token:
+        raise HTTPException(status_code=404, detail="Access токен не найден")
+    
+    payload = jwt.decode(
+        access_token,
+        SECRET_KEY,
+        algorithms=["HS256"]
+    )
+    
+    if payload.get("role") != "admin":
+        raise HTTPException(status_code=403, detail="Доступ запрещен")
+    
+    return payload

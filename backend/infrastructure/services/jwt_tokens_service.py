@@ -48,8 +48,8 @@ class JwtTokensService(IJWTService):
         )
         
         return {
-            'access': access_token,
-            'refresh': refresh_token,
+            'access_token': access_token,
+            'refresh_token': refresh_token,
         }
     
     def decode_jwt_token(self, token: str):

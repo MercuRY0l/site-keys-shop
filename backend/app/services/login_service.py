@@ -58,13 +58,13 @@ class LoginService:
             await self.log_service.create_log(LogDomainModel(event_type="Login", username=login_dto.username ,user_id=user.id, status="Failed", ip=login_dto.ip, reason="Неудачная попытка входа, неверный пароль!"))
             raise WrongPassword()
         
-        tokens = self.jwt_service.create_jwt_token(user.id, user.username)
+        tokens = self.jwt_service.create_jwt_token(user.id, user.username, user.role)
         
         await self.brute_service.reset_attempts()
         
         await self.log_service.create_log(LogDomainModel(event_type="Login", username=login_dto.username, user_id=user.id, status="Success", ip=login_dto.ip, reason="Пользователь успешно вошел!"))
         
-        return AuthTokensDTO(refresh_token=tokens['refresh'], access_token=tokens['access'])
+        return AuthTokensDTO(refresh_token=tokens['refresh_token'], access_token=tokens['access_token'])
         
         
     

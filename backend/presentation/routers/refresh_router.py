@@ -31,7 +31,7 @@ def get_refresh_service():
     )
 
 @refresh_router.post("/auth/refresh")
-async def refresh(response: Response, request : Request, service : dict = Depends(get_refresh_service)):
+async def refresh(response: Response, request : Request, service : RefreshService = Depends(get_refresh_service)):
     
     client_host = request.client.host
     
@@ -40,10 +40,11 @@ async def refresh(response: Response, request : Request, service : dict = Depend
     
     tokens = await service.refresh(RefreshDTO(refresh_token=refresh_token, ip=client_host))
     
+    
     response.set_cookie(
         key="access_token",
         path="/",
-        value=tokens["access"],
+        value=tokens.access_token,
         samesite="lax",
         secure=False,
         httponly=False
@@ -52,7 +53,7 @@ async def refresh(response: Response, request : Request, service : dict = Depend
     response.set_cookie(
         key="refresh_token",
         path="/",
-        value=tokens["refresh"],
+        value=tokens.refresh_token,
         samesite="lax",
         secure=False,
         httponly=False

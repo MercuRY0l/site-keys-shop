@@ -9,6 +9,7 @@ from domain.interfaces.brute_interface import IBruteService
 
 from domain.models.log_domain_model import LogDomainModel
 
+from app.dto.auth_tokens_dto import AuthTokensDTO
 
 from app.dto.refresh_dto import RefreshDTO
 
@@ -35,7 +36,7 @@ class RefreshService:
         
         if not refresh_token:
             await self.log_service.create_log(LogDomainModel(event_type="Refresh", username=None, user_id=None, status="Failed", ip=refresh_dto.ip, reason="Невозможно обновить токен, refresh токена нет!"))
-            return {"error" : "Refresh токен не найден"}
+            raise TokenNotFound()
         
         try:
             payload = self.jwt_service.decode_jwt_token(refresh_token)
@@ -64,9 +65,9 @@ class RefreshService:
             raise UserNotFound()
             
         
-        tokens = self.jwt_service.create_jwt_token(user_id = user_from_db.id, username=user_from_db.username)
+        tokens = self.jwt_service.create_jwt_token(user_id = user_from_db.id, username=user_from_db.username, role=user_from_db.role)
 
         await self.log_service.create_log(LogDomainModel(event_type="Refresh", username=user_from_db.username, user_id=user_from_db.id, status="Success", ip=refresh_dto.ip, reason="Токен успешно обновлен!"))
-        return {"refresh_token" : tokens['refresh'], "access_token" : tokens['access'], "ip" : refresh_dto.ip}
+        return AuthTokensDTO(refresh_token=tokens['refresh_token'], access_token=tokens['access_token'])
 
     
