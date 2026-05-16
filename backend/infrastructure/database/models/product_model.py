@@ -3,7 +3,8 @@ from sqlalchemy import (
     Integer,
     String,
     Numeric,
-    Text
+    Text,
+    Boolean
 )
 from sqlalchemy.orm import relationship
 
@@ -20,5 +21,6 @@ class Product(Base):
     product_price = Column(Numeric(10, 2), nullable=False)
     product_quantity = Column(Integer)
     product_imageUrl = Column(String)
+    is_active = Column(Boolean, default=1, nullable=False)
     
     cart_items = relationship("CartItem", back_populates="product")
