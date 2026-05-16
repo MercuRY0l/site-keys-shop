@@ -1,38 +1,26 @@
 
 import { API_URL } from "../../config.js";
 
-export async function deleteProductById(){
-
-    const form = document.getElementById("deleteProductFormContainer")
-
-    const product_id = document.getElementById("productId").value;
-
-    const formData = new FormData();
-    formData.append("product_id", product_id)
-
-    if (!product_id){
-        alert("Заполните поле id!");
-        return;
-    }
-
+export async function deleteProduct(product_id){
     try{
-        const response = await fetch(`${API_URL}/products/delete/`, {
-        method: "POST",
-        body : formData
+        const response = await fetch(`${API_URL}/products/delete/${product_id}`, {
+        method: "DELETE"
     });
         const result = await response.json();
         console.log("Ответ сервера:", result);
         
         if (response.ok) { 
             alert("Продукт успешно удален!");
+            return true;
 
         } else {
             alert("Ошибка при удалении продукта: " + (result.error || "Неизвестная ошибка"));
+            return false;
         }
     }
 
     catch(error){
         alert(error); 
+        return false;
     }
-
 }
