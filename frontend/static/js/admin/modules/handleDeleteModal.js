@@ -1,11 +1,13 @@
-export function showAddFormBtn() {
 
-    const button = document.getElementById("showAddFormBtn");
-    const modal = document.getElementById("addModal");
+
+export function showDeleteForm() {
+
+    const button = document.getElementById("showDeleteFormBtn");
+    const modal = document.getElementById("deleteModal");
     
 
     if (!button) {
-        console.error("Ошибка: Кнопка showAddFormBtn не найдена");
+        console.error("Ошибка: Кнопка showDeleteFormBtn не найдена");
         return;
     }
     
@@ -24,9 +26,8 @@ export function showAddFormBtn() {
     });
 }
 
-export function closeAddFormBtn(){
-    
-    const modal = document.getElementById("addModal");
+export function closeDeleteForm(){
+    const modal = document.getElementById("deleteModal");
     const button = modal.querySelector(".close-modal")
 
     if (!button) {
