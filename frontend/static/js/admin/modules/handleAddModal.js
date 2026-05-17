@@ -1,4 +1,6 @@
-export function showAddFormBtn() {
+import { addNewProduct } from "./addNewProduct.js";
+
+export async function showAddFormBtn() {
 
     const button = document.getElementById("showAddFormBtn");
     const modal = document.getElementById("addModal");
@@ -22,6 +24,14 @@ export function showAddFormBtn() {
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
     });
+
+    const add_product_btn = document.getElementById("confirmAddProductBtn");
+    if (!add_product_btn) return;
+
+    add_product_btn.addEventListener("click", async()=>{
+        await addNewProduct();
+    })
+    
 }
 
 export function closeAddFormBtn(){

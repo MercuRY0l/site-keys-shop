@@ -1,6 +1,6 @@
+import { loadAllProducts } from "./loadAllProducts.js";
 
-
-export function showDeleteForm() {
+export async function showDeleteForm() {
 
     const button = document.getElementById("showDeleteFormBtn");
     const modal = document.getElementById("deleteModal");
@@ -24,6 +24,8 @@ export function showDeleteForm() {
         modal.classList.add("active");
         document.body.style.overflow = "hidden";
     });
+
+    await loadAllProducts();
 }
 
 export function closeDeleteForm(){

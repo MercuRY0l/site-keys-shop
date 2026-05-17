@@ -165,8 +165,8 @@ async def create_product(
     return {"message" : "Product created successfully"}
 
 
-@router.post("/products/delete/")
-async def delete_product(product_id : int = Form(...)):
+@router.delete("/products/delete/{product_id}")
+async def delete_product(product_id : int):
     repo = ProductRepository()
     await repo.delete_product_by_id(product_id=product_id)
     return {"message" : "Product deleted successfully"}

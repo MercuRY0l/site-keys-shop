@@ -19,28 +19,28 @@ class ProductRepository:
     
     async def select_all_products(self):
         async with SessionLocal() as session:
-            res = await session.execute(select(Product))
+            res = await session.execute(select(Product).where(Product.is_active == True))
             all_products = res.scalars().all()
                  
             return all_products
         
     async def select_all_games(self):
         async with SessionLocal() as session:
-            res = await session.execute(select(Product).where(Product.product_category == "Games"))
+            res = await session.execute(select(Product).where(Product.product_category == "Games", Product.is_active == True))
             all_games = res.scalars().all()
             
             return all_games
         
     async def select_all_dlc(self):
         async with SessionLocal() as session:
-            res = await session.execute(select(Product).where(Product.product_category == "DLC"))
+            res = await session.execute(select(Product).where(Product.product_category == "DLC", Product.is_active == True))
             all_dlc = res.scalars().all()
             
             return all_dlc
     
     async def select_all_subscribes(self):
         async with SessionLocal() as session:
-            res = await session.execute(select(Product).where(Product.product_category == "Subscribes"))
+            res = await session.execute(select(Product).where(Product.product_category == "Subscribes", Product.is_active == True))
             all_sub = res.scalars().all()
             
             return all_sub
@@ -72,14 +72,18 @@ class ProductRepository:
             
     
     async def delete_product_by_id(self, product_id : int):
-        
         async with SessionLocal() as session:
-            
-            stmt = delete(Product).where(Product.id == product_id)
+            stmt = select(Product).where(Product.id == product_id)
             res = await session.execute(stmt)
-            await session.commit()
-            return res.rowcount
+            product = res.scalar_one_or_none()
             
+            if not product:
+                return False
+            
+            product.is_active = False
+            await session.commit()
+            return True            
+              
     async def find_product_by_id(self, product_id : int):
         
         async with SessionLocal() as session:
