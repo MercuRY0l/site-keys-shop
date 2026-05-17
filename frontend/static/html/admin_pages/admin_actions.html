@@ -25,7 +25,12 @@
             <button class="close-modal" data-close="addModal">&times;</button>
         </div>
         <div class="add-product-form">
-            <input type="text" id="modalProductCategory" placeholder="Категория (например: Электроника)" autocomplete="off">
+            
+            <select id="modalProductCategory" class="modalProductCategory">
+                <option value="Games">Игры</option>
+                <option value="DLC">DLC</option>
+                <option value="Subscribes">Подписки</option>
+            </select>
             <input type="text" id="modalProductName" placeholder="Название товара" autocomplete="off">
             <textarea id="modalProductDescription" placeholder="Описание товара..."></textarea>
             <input type="number" id="modalProductPrice" placeholder="Цена (₽)" step="0.01">
