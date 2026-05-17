@@ -1,9 +1,10 @@
 
 import { API_URL } from "../../config.js";
+import { apiFetch } from "../../modules/apiFetch.js";
 
 export async function deleteProduct(product_id){
     try{
-        const response = await fetch(`${API_URL}/products/delete/${product_id}`, {
+        const response = await apiFetch(`${API_URL}/products/delete/${product_id}`, {
         method: "DELETE"
     });
         const result = await response.json();

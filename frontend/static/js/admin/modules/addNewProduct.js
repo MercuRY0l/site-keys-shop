@@ -1,4 +1,5 @@
 import { API_URL } from "../../config.js";
+import { apiFetch } from "../../modules/apiFetch.js";
 import {showToast } from "../../modules/showToast.js"
 
 export async function addNewProduct() {
@@ -34,7 +35,7 @@ export async function addNewProduct() {
 
      
     try {
-        const response = await fetch(`${API_URL}/products/create/`, {
+        const response = await apiFetch(`${API_URL}/products/create/`, {
             method: "POST",
             body: formData
         });

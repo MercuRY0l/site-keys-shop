@@ -2,6 +2,7 @@
 
 import { API_URL } from "../../config.js"
 import { deleteProduct } from "./deleteProduct.js";
+import { apiFetch } from "../../modules/apiFetch.js"
 
 export async function loadAllProducts() {
 
@@ -20,7 +21,7 @@ export async function loadAllProducts() {
 
     try {
 
-        const response = await fetch(`${API_URL}/products/`, {
+        const response = await apiFetch(`${API_URL}/products/`, {
             method: "GET"
         });
 
@@ -106,7 +107,7 @@ export async function loadAllProducts() {
 
                 console.log("Редактировать товар:", productId);
 
-                // тут открываешь модалку редактирования
+                
 
             });
 
