@@ -178,6 +178,27 @@ async def edit_product(product_id : int):
     await repo.edit_product(product_id=product_id)
     return {"message" : "Product successfully updated"}
 
+@router.get("/products/edit/{product_id}")
+async def get_edit_product(product_id : int ):
+    repo = ProductRepository()
+    product = await repo.find_product_by_id(product_id=product_id)
+    
+    if not product:
+        return {"message" : "not found"} 
+    
+    return {
+        "product_id": product.id,
+        "product_category" : product.product_category,
+        "product_name": product.product_name,
+        "product_description" : product.product_description,
+        "product_price": product.product_price,
+        "product_quantity" : product.product_quantity,
+        "product_imageUrl" : product.product_imageUrl
+    }
+        
+    
+    
+
 @router.get("/all_products")
 async def all_products_page(request: Request):
     return templates.TemplateResponse("all_products_page.html", {"request": request })
