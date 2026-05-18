@@ -4,7 +4,7 @@ from infrastructure.database.db_connector import SessionLocal
 from infrastructure.database.models.product_model import Product
 from typing import Optional
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, select, update
 
 class ProductRepository:
     
@@ -102,3 +102,11 @@ class ProductRepository:
             stmt = select(Product).where(Product.name == name)
             res = await session.execute(stmt)
             return res.scalars().first()
+        
+    async def edit_product(self, product_id : int, **data):
+        async with SessionLocal() as session:
+            stmt = update(Product).where(Product.id == product_id).values(**data)
+            await session.execute(stmt)
+            await session.commit()
+            
+            return True
