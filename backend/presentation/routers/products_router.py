@@ -172,6 +172,12 @@ async def delete_product(product_id : int):
     return {"message" : "Product deleted successfully"}
 
 
+@router.patch("/products/edit/{product_id}")
+async def edit_product(product_id : int):
+    repo = ProductRepository()
+    await repo.edit_product(product_id=product_id)
+    return {"message" : "Product successfully updated"}
+
 @router.get("/all_products")
 async def all_products_page(request: Request):
     return templates.TemplateResponse("all_products_page.html", {"request": request })
