@@ -1,20 +1,26 @@
+from fastapi import HTTPException
 
 
+class AuthException(HTTPException):
+    def __init__(self, detail="Ошибка авторизации"):
+        super().__init__(status_code=401, detail=detail)
 
-class TokenNotFound(ValueError):
-    def __init__(self, msg = "Refresh токен не найден!"):
+
+class TokenNotFound(AuthException):
+    def __init__(self, msg="Refresh токен не найден!"):
         super().__init__(msg)
-        
-        
-class TokenTypeIncorrect(ValueError):
-    def __init__(self, msg = "Неверный тип токена!"):
+
+
+class TokenTypeIncorrect(AuthException):
+    def __init__(self, msg="Неверный тип токена!"):
         super().__init__(msg)
-        
-class UserNotFound(ValueError):
-    def __init__(self, msg = "Пользователь не найден!"):
+
+
+class UserNotFound(AuthException):
+    def __init__(self, msg="Пользователь не найден!"):
         super().__init__(msg)
-        
-        
-class TokenIsBlacklisted(ValueError):
-     def __init__(self, msg = "Токен в черном списке!"):
+
+
+class TokenIsBlacklisted(AuthException):
+    def __init__(self, msg="Токен в черном списке!"):
         super().__init__(msg)
