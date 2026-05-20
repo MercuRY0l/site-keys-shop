@@ -202,23 +202,21 @@ async def edit_product(
         if product_quantity:
             updated_data["product_quantity"] = product_quantity
         
-        
+      
         if product_image and product_image.filename:
-            import uuid, os
-            
-            
-            os.makedirs("frontend/static/uploads/products", exist_ok=True)
+            import uuid
             
             
             ext = product_image.filename.split(".")[-1]
             filename = f"{uuid.uuid4()}.{ext}"
-            file_path = f"frontend/static/uploads/products/{filename}"
+            file_path = f"frontend/static/images/products/{filename}"
             
             content = await product_image.read()
             with open(file_path, "wb") as f:
                 f.write(content)
             
-            updated_data["product_imageUrl"] = f"/static/uploads/products/{filename}"
+            
+            updated_data["product_imageUrl"] = f"/static/images/products/{filename}"
         
         
         if updated_data:
