@@ -41,6 +41,7 @@ color: transparent;
 
 .primary-buttons {
 display: flex;
+flex-direction: column;
 gap: 1.2rem;
 justify-content: center;
 flex-wrap: wrap;
@@ -476,4 +477,352 @@ to { transform: rotate(360deg); }
 .delete-item-btn {
     width: 100%;
 }
+}
+
+
+.edit-modal-content {
+    background: white;
+    border-radius: 2rem;
+    width: 100%;
+    max-width: 650px;
+    overflow: hidden;
+    box-shadow: 0 30px 50px rgba(0,0,0,0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.edit-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.edit-modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    letter-spacing: -0.3px;
+}
+
+.edit-modal-close {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 300;
+}
+
+.edit-modal-close:hover {
+    background: rgba(255,255,255,0.3);
+    transform: rotate(90deg);
+}
+
+.edit-modal-body {
+    padding: 2rem;
+    max-height: 70vh;
+    overflow-y: auto;
+}
+
+/* Стилизация скроллбара внутри модального окна */
+.edit-modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.edit-modal-body::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+.edit-modal-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 10px;
+}
+
+.edit-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Группы формы */
+.edit-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.edit-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #1e293b;
+    letter-spacing: -0.2px;
+}
+
+.edit-form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 1rem;
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.edit-form-control:focus {
+    outline: none;
+    border-color: #3b82f6;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.edit-form-control:hover:not(:focus) {
+    border-color: #cbd5e1;
+    background: #f1f5f9;
+}
+
+/* Textarea */
+textarea.edit-form-control {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* Select */
+select.edit-form-control {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3E%3Cpath stroke='%2364748b' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+}
+
+/* Ряд для двух полей */
+.edit-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.edit-form-row .edit-form-group {
+    margin-bottom: 0;
+}
+
+/* Текущее изображение */
+.edit-current-image {
+    margin: 0.5rem 0 1rem 0;
+    padding: 0.5rem;
+    background: #f8fafc;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    display: inline-block;
+}
+
+.edit-current-image img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 8px;
+    display: block;
+}
+
+/* File input */
+.file-input {
+    margin-top: 0.5rem;
+}
+
+.file-input label {
+    font-size: 0.85rem;
+    color: #334155;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.file-input input[type="file"] {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1.5px dashed #cbd5e1;
+    border-radius: 1rem;
+    background: #f8fafc;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+}
+
+.file-input input[type="file"]:hover {
+    border-color: #3b82f6;
+    background: #f1f5f9;
+}
+
+/* Футер с кнопками */
+.edit-modal-footer {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+
+.edit-btn-cancel,
+.edit-btn-submit {
+    flex: 1;
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 60px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+}
+
+.edit-btn-cancel {
+    background: #f1f5f9;
+    color: #475569;
+    border: 1px solid #e2e8f0;
+}
+
+.edit-btn-cancel:hover {
+    background: #fee2e2;
+    color: #dc2626;
+    border-color: #fecaca;
+    transform: translateY(-2px);
+}
+
+.edit-btn-submit {
+    background: linear-gradient(95deg, #10b981, #059669);
+    color: white;
+    box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.edit-btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);
+}
+
+.edit-btn-cancel:active,
+.edit-btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 640px) {
+    .edit-modal-content {
+        max-width: 95%;
+        margin: 1rem;
+    }
+    
+    .edit-modal-header {
+        padding: 1rem 1.5rem;
+    }
+    
+    .edit-modal-header h3 {
+        font-size: 1.3rem;
+    }
+    
+    .edit-modal-body {
+        padding: 1.5rem;
+    }
+    
+    .edit-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+    
+    .edit-form-row .edit-form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .edit-modal-footer {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+    
+    .edit-btn-cancel,
+    .edit-btn-submit {
+        padding: 0.7rem;
+    }
+}
+
+
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-width: 260px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    opacity: 0;
+
+    animation:
+        toastIn 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+        toastOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) 3s forwards;
+}
+
+/* Успех */
+.toast.success {
+    background: linear-gradient(135deg, #3bbf8a, #2e9f74);
+}
+
+/* Ошибка */
+.toast.error {
+    background: linear-gradient(135deg, #d86a6a, #b84b4b);
+}
+
+/* Анимация появления */
+@keyframes toastIn {
+    from {
+        transform: translateX(120%) scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Анимация исчезновения */
+@keyframes toastOut {
+    to {
+        transform: translateX(120%) scale(0.95);
+        opacity: 0;
+    }
 }

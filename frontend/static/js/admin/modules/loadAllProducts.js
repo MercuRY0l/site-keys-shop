@@ -1,8 +1,9 @@
 
 
 import { API_URL } from "../../config.js"
-import { deleteProduct } from "./deleteProduct.js";
+import { deleteProduct } from "./delete/deleteProduct.js";
 import { apiFetch } from "../../modules/apiFetch.js"
+import {showToast} from "../../modules/showToast.js"
 
 export async function loadAllProducts() {
 
@@ -84,34 +85,9 @@ export async function loadAllProducts() {
             container.appendChild(card);
         });
 
-       
-        const delete_btn = document.querySelectorAll(".delete-btn").forEach(btn=>{
-            
-            btn.addEventListener("click", async()=> {
-                const product_id = btn.dataset.id;
-                const success = await deleteProduct(product_id);
-
-                if (success){
-                    btn.closest(".product-card").remove();
-                }
-            })
-        })
-        
 
         
-        document.querySelectorAll(".edit-btn").forEach(btn => {
-
-            btn.addEventListener("click", () => {
-
-                const productId = btn.dataset.id;
-
-                console.log("Редактировать товар:", productId);
-
-                
-
-            });
-
-        });
+        
 
     } catch (error) {
 

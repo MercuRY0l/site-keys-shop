@@ -1,6 +1,6 @@
 
-import { API_URL } from "../../config.js";
-import { apiFetch } from "../../modules/apiFetch.js";
+import { API_URL } from "../../../config.js";
+import { apiFetch } from "../../../modules/apiFetch.js";
 
 export async function deleteProduct(product_id){
     try{

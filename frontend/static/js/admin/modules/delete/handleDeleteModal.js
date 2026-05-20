@@ -1,4 +1,6 @@
-import { loadAllProducts } from "./loadAllProducts.js";
+import { loadAllProducts } from "../loadAllProducts.js";
+import {handleDeleteProduct} from "./handleDelete.js"
+import {handleEdit} from "../edit/handleEdit.js"
 
 export async function showDeleteForm() {
 
