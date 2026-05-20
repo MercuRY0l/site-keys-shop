@@ -1,13 +1,15 @@
 
 
 
-import shutil
+import shutil, os, uuid
 from fastapi import APIRouter, Request, Form, UploadFile, File,Query
+from fastapi.exceptions import HTTPException
 from fastapi.templating import Jinja2Templates
 
 # from pydantic_models.product_pydantic import Product_pydantic
 
 from infrastructure.database.repositories.product_repo import ProductRepository
+from app.dto.product_update_dto import ProductUpdateDto
 
 templates = Jinja2Templates(directory="C:/Users/udgit/Documents/site-shop/frontend/static/html")
 
@@ -165,12 +167,88 @@ async def create_product(
     return {"message" : "Product created successfully"}
 
 
-@router.post("/products/delete/")
-async def delete_product(product_id : int = Form(...)):
+@router.delete("/products/delete/{product_id}")
+async def delete_product(product_id : int):
     repo = ProductRepository()
     await repo.delete_product_by_id(product_id=product_id)
     return {"message" : "Product deleted successfully"}
 
+
+
+
+@router.patch("/products/edit/{product_id}")
+async def edit_product(
+    product_id: int,
+    product_name: str = None,
+    product_category: str = None,
+    product_description: str = None,
+    product_price: float = None,
+    product_quantity: int = None,
+    product_image: UploadFile = None
+):
+    try:
+        repo = ProductRepository()
+        
+        updated_data = {}
+        
+        if product_name:
+            updated_data["product_name"] = product_name
+        if product_category:
+            updated_data["product_category"] = product_category
+        if product_description:
+            updated_data["product_description"] = product_description
+        if product_price:
+            updated_data["product_price"] = product_price
+        if product_quantity:
+            updated_data["product_quantity"] = product_quantity
+        
+      
+        if product_image and product_image.filename:
+            import uuid
+            
+            
+            ext = product_image.filename.split(".")[-1]
+            filename = f"{uuid.uuid4()}.{ext}"
+            file_path = f"frontend/static/images/products/{filename}"
+            
+            content = await product_image.read()
+            with open(file_path, "wb") as f:
+                f.write(content)
+            
+            
+            updated_data["product_imageUrl"] = f"/static/images/products/{filename}"
+        
+        
+        if updated_data:
+            await repo.edit_product(product_id=product_id, **updated_data)
+            return {"message": "Товар успешно обновлен", "updated": updated_data}
+        else:
+            return {"message": "Нет данных для обновления"}
+            
+    except Exception as e:
+        print(f"Error: {e}")
+        return {"message": f"Ошибка: {str(e)}"}, 500
+
+@router.get("/products/edit/{product_id}")
+async def get_edit_product(product_id : int):
+    repo = ProductRepository()
+    product = await repo.find_product_by_id(product_id=product_id)
+    
+    if not product:
+        return {"message" : "not found"} 
+    
+    return {
+        "product_id": product.id,
+        "product_category" : product.product_category,
+        "product_name": product.product_name,
+        "product_description" : product.product_description,
+        "product_price": product.product_price,
+        "product_quantity" : product.product_quantity,
+        "product_imageUrl" : product.product_imageUrl
+    }
+        
+    
+    
 
 @router.get("/all_products")
 async def all_products_page(request: Request):

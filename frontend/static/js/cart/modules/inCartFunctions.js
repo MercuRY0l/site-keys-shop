@@ -1,5 +1,7 @@
 import { updateTotalAmount } from "./calculateTotal.js";
 import {showToast} from "../../modules/showToast.js"
+import { API_URL } from "../../config.js";
+import { apiFetch } from "../../modules/apiFetch.js";
 
 export function inCartFunctions() {
     if (window.cartQuantityHandlerAdded) return;
@@ -23,7 +25,7 @@ export function inCartFunctions() {
             counter.textContent = quantity;
 
             try {
-                await fetch("http://127.0.0.1:8000/cart/items/", {
+                await apiFetch(`${API_URL}/cart/items/`, {
                     method: "POST",
                     credentials: "include",
                     headers: { "Content-Type": "application/json" },
@@ -38,7 +40,7 @@ export function inCartFunctions() {
             quantity -= 1;
 
             try {
-                await fetch("http://127.0.0.1:8000/cart/items/delete", {
+                await apiFetch(`${API_URL}/cart/items/delete`, {
                     method: "POST",
                     credentials: "include",
                     headers: { "Content-Type": "application/json" },
@@ -72,7 +74,7 @@ export function inCartFunctions() {
         
         try{
             
-            const response = await fetch("http://127.0.0.1:8000/orders/from-cart", {
+            const response = await apiFetch(`${API_URL}/orders/from-cart`, {
                 method : "POST",
                 credentials : "include",
                 headers : {"Content-Type" : "application/json"},

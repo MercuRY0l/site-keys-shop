@@ -15,7 +15,8 @@ def orm_to_domain(orm_user: UserModel) -> UserDomainModel:
         username=orm_user.username,
         password=orm_user.password,
         email=orm_user.email,
-        created_at=orm_user.created_at
+        created_at=orm_user.created_at,
+        role=orm_user.role
     )
 
 class UserRepository(IUserRepository):

@@ -1,6 +1,6 @@
-
-
+import { API_URL } from "../config.js";
 import { getProductIdFromUrl } from "./getProductIdFromUrl.js";
+import { apiFetch } from "./apiFetch.js";
 
 export async function loadProduct(){
 
@@ -9,7 +9,7 @@ export async function loadProduct(){
 
         if (!product_id) return;
 
-        const response = await fetch(`http://127.0.0.1:8000/api/product/${product_id}/`)
+        const response = await apiFetch(`${API_URL}/api/product/${product_id}/`)
         const product = await response.json()
 
         const container = document.querySelector(".product-info")

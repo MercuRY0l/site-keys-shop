@@ -1,9 +1,10 @@
 
-
+import { API_URL } from "../config.js";
+import { apiFetch} from "../modules/apiFetch.js"
 
 export async function loadCurrentUser(){
     try{
-        const response = await fetch("http://127.0.0.1:8000/api/auth/me/", {
+        const response = await apiFetch(`${API_URL}/api/auth/me/`, {
             credentials : "include"
         })
 

@@ -1,22 +1,25 @@
-
+import { API_URL } from "../../config.js";
+import { apiFetch } from "../../modules/apiFetch.js";
+import {showToast } from "../../modules/showToast.js"
 
 export async function addNewProduct() {
-    const imageInput = document.getElementById("imageProduct");
+    const imageInput = document.getElementById("modalImageProduct");
     const file = imageInput.files[0];
 
     if (!file) {
-        alert("Пожалуйста, выберите картинку.");
+        showToast("error", "Выберите картинку")
         return;
     }
 
-    const category = document.getElementById("productCategory").value;
-    const name = document.getElementById("productName").value;
-    const price = document.getElementById("productPrice").value;
-    const description = document.getElementById("productDescription").value;
-    const quantityInput = document.getElementById("productQuantity").value;
+    const category = document.getElementById("modalProductCategory").value;
+    const name = document.getElementById("modalProductName").value;
+    const price = document.getElementById("modalProductPrice").value;
+    const description = document.getElementById("modalProductDescription").value;
+    const quantityInput = document.getElementById("modalProductQuantity").value;
+
 
     if (!category || !name || !price || !description || !quantityInput) {
-        alert("Пожалуйста, заполните все поля.");
+        showToast("error", "Заполните все поля")
         return;
     }
 
@@ -30,9 +33,9 @@ export async function addNewProduct() {
     formData.append("product_quantity", quantity);
     formData.append("product_imageUrl", file);
 
-    
+     
     try {
-        const response = await fetch("http://127.0.0.1:8000/products/create/", {
+        const response = await apiFetch(`${API_URL}/products/create/`, {
             method: "POST",
             body: formData
         });
@@ -42,6 +45,7 @@ export async function addNewProduct() {
 
         if (response.ok) {
             alert("Продукт успешно добавлен!");
+            
         } else {
             alert("Ошибка при добавлении продукта: " + JSON.stringify(result.detail));
         }
@@ -49,4 +53,20 @@ export async function addNewProduct() {
     } catch (error) {
         console.error("Ошибка при добавлении продукта:", error);
     }
+
+    clearForm();
+}
+
+
+
+function clearForm() {
+
+    document.getElementById('modalProductCategory').selectedIndex = 0;
+    
+    document.getElementById('modalProductName').value = '';
+    document.getElementById('modalProductDescription').value = '';
+    document.getElementById('modalProductPrice').value = '';
+    document.getElementById('modalProductQuantity').value = '';
+    
+    document.getElementById('modalImageProduct').value = '';
 }

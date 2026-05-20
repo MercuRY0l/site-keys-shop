@@ -1,19 +1,21 @@
-import { getUser } from "../modules/getUser.js";
+import { API_URL } from "../config.js";
+import {loadCurrentUser} from "../modules/loadCurrentUser.js"
+import { apiFetch } from "./apiFetch.js";
 
 export async function loadAllProductsCatalog() {
     try {
         const container = document.getElementById("all-products-catalog");
         if (!container) return;
 
-        const response = await fetch("http://127.0.0.1:8000/products/");
+        const response = await apiFetch(`${API_URL}/products/`);
         const products = await response.json();
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
 
         let cart_items = [];
         if (user) {
             try {
-                const response2 = await fetch("http://127.0.0.1:8000/cart/items/get", {
+                const response2 = await apiFetch(`${API_URL}/cart/items/get`, {
                     method: "GET",
                     credentials: "include"
                 });

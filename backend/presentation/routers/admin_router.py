@@ -1,13 +1,14 @@
-from fastapi import Request
+from fastapi import Request, Depends
 
 from fastapi.routing import APIRouter 
 from fastapi.templating import Jinja2Templates
 
-router = APIRouter()
+from presentation.routers.deps import get_current_admin
+
+admin_router = APIRouter()
 
 templates = Jinja2Templates(directory="C:/Users/udgit/Documents/site-shop/frontend/static/html")
 
-@router.get("/admin")
-async def get_admin_panel(request : Request):
-    return templates.TemplateResponse("admin.html", {"request": request})
-    
+@admin_router.get("/admin/actions")
+async def get_admin_auth_page(request : Request, user = Depends(get_current_admin)):
+    return templates.TemplateResponse("admin_pages/admin_actions.html", {"request": request})

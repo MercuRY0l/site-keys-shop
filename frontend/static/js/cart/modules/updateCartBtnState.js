@@ -1,3 +1,5 @@
+import { API_URL } from "../../config.js";
+import { apiFetch } from "../../modules/apiFetch.js";
 
 
 
@@ -5,7 +7,7 @@ export async function updateCartButtonState(cartBtn) {
     const product_id = cartBtn.dataset.productId;
 
     try {
-        const response = await fetch("http://127.0.0.1:8000/cart/items/get", {
+        const response = await apiFetch(`${API_URL}/cart/items/get`, {
             method: "GET",
             credentials: "include"
         });

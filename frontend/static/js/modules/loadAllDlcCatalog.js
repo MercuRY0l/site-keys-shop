@@ -1,22 +1,22 @@
 
-import { getUser } from "./getUser.js";
-// import {showToast} from "../modules/showToast.js"
-
+import { API_URL } from "../config.js";
+import { apiFetch } from "./apiFetch.js";
+import {loadCurrentUser} from "./loadCurrentUser.js"
 
 export async function loadAllDlcCatalog(){
     try {
         const container = document.getElementById("all-dlc-catalog");
         if (!container) return;
 
-        const response = await fetch("http://127.0.0.1:8000/products/dlc");
+        const response = await apiFetch(`${API_URL}/products/dlc`);
         const products = await response.json();
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
 
         let cart_items = [];
         if (user) {
             try {
-                const response2 = await fetch("http://127.0.0.1:8000/cart/items/get", {
+                const response2 = await apiFetch(`${API_URL}/cart/items/get`, {
                     method: "GET",
                     credentials: "include"
                 });

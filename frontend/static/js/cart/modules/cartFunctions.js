@@ -1,12 +1,15 @@
-import { getUser } from "../../modules/getUser.js";
+import { loadCurrentUser } from "../../modules/loadCurrentUser.js";
 import { showToast } from "../../modules/showToast.js";
+import {apiFetch} from "../../modules/apiFetch.js"
+import {API_URL} from "../../config.js"
+
 
 export function handleCartClicks() {
     document.addEventListener("click", async (e) => {
         const clickedCartBtn = e.target.closest(".add-to-cart-btn");
         if (!clickedCartBtn || clickedCartBtn.classList.contains("added")) return;
 
-        const user = await getUser();
+        const user = await loadCurrentUser();
         if (!user) {
             showToast("Для данного действия необходима авторизация", "error");
             return;
@@ -18,7 +21,7 @@ export function handleCartClicks() {
         const quantity = 1;
 
         try {
-            const response = await fetch("http://127.0.0.1:8000/cart/items/", {
+            const response = await apiFetch(`${API_URL}/cart/items/`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
